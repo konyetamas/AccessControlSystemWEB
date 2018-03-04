@@ -28,10 +28,10 @@ namespace EntryManagementWEB.DB
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Entry> Entries { get; set; }
         public virtual DbSet<Member> Members { get; set; }
-        public virtual DbSet<MessageFromBuilding> MessageFromBuildings { get; set; }
-        public virtual DbSet<MessageFromCompany> MessageFromCompanies { get; set; }
         public virtual DbSet<MessagesOfCompany> MessagesOfCompanies { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<MessageFromBuilding> MessageFromBuildings { get; set; }
+        public virtual DbSet<MessageFromCompany> MessageFromCompanies { get; set; }
     }
 }

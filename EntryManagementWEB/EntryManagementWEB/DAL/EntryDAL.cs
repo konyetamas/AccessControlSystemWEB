@@ -1,22 +1,28 @@
-﻿using EntryManagement.DB;
-using EntryManagement.Model;
+﻿using EntryManagementWEB.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EntryManagementWEB.DB;
 
-namespace EntryManagement.DAL
+namespace EntryManagementWEB.DAL
 {
     public class EntryDAL
     {
-        public static List<EntryModel> GetEntries()
+        public static List<EntryModel> GetEntriesByCompanyId(int CompanyId)
         {
 
             AccessControlSystemEntities context = new AccessControlSystemEntities();
             try
             {
-                List<Entry> entries = context.Entries.ToList();
+                List<Entry> entries = (from x in context.Entries
+                                       from y in context.Members
+                                       where x.MemberId == y.Id
+                                       where y.CompanyId == CompanyId
+                                       select x
+                                       ).ToList();
+                                      
                 List<EntryModel> entryModels = new List<EntryModel>();
                 foreach (Entry item in entries)
                 {

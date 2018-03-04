@@ -3,31 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntryManagement.DB;
-using EntryManagement.Model;
+using EntryManagementWEB.DB;
+using EntryManagementWEB.Model;
 
-namespace EntryManagement.DAL
+namespace EntryManagementWEB.DAL
 {
     public class MessageDAL
     {
-        public static void AddNewMessage()
+        public static void AddNewMessage(MessageFromCompanyModel messageModel)
         {
             AccessControlSystemEntities context = new AccessControlSystemEntities();
-            
+            try
+            {
+                MessageFromCompany messageDB = MaptoMessageFromCompanyDBModel(messageModel, context);
+                context.MessageFromCompanies.Add(messageDB); 
+            }
+            catch(Exception e )
+            {
+
+            }
         }
 
 
-        public static List<MessageFromCompanyModel> GetMessagesFromCompanies()
+
+
+        public static List<MessageToCompanyModel> GetMessagesFromBuildingToCompany(int CompanyId)
         {
 
             AccessControlSystemEntities context = new AccessControlSystemEntities();
             try
             {
-                List<MessageFromCompany> messagesDB = context.MessageFromCompanies.ToList();
-                List<MessageFromCompanyModel> messagesModel = new List<MessageFromCompanyModel>();
-                foreach (MessageFromCompany item in messagesDB)
+                List<MessageFromBuilding> messagesDB = (from x in context.MessagesOfCompanies
+                                                      from y in context.MessageFromBuildings
+                                                      where x.CompanyId == CompanyId
+                                                      where x.MessageFromBuildingId == y.Id
+                                                      select y).ToList();
+                                                                     
+                List<MessageToCompanyModel> messagesModel = new List<MessageToCompanyModel>();
+                foreach (MessageFromBuilding item in messagesDB)
                 {
-                    messagesModel.Add(MapToMemberMessageFromCompanyModel(item, context));
+                    messagesModel.Add(MapToMessageToCompanyModel(item, context));
                 }
                 return messagesModel;
             }
@@ -51,6 +66,27 @@ namespace EntryManagement.DAL
                                       ).FirstOrDefault();
 
             return messageFormCompany;
+        }
+
+
+        private static MessageToCompanyModel MapToMessageToCompanyModel(MessageFromBuilding messageFromBulidingDB, AccessControlSystemEntities context)
+        {
+            MessageToCompanyModel messageToCompany = new MessageToCompanyModel();
+            messageToCompany.Id = messageFromBulidingDB.Id;
+            messageToCompany.Text = messageFromBulidingDB.Value;
+            messageToCompany.Date = messageFromBulidingDB.Date;
+            messageToCompany.Subject = messageFromBulidingDB.Subject;
+            return messageToCompany;
+        }
+
+
+        private static MessageFromCompany MaptoMessageFromCompanyDBModel(MessageFromCompanyModel messageFromCompanyModel, AccessControlSystemEntities context)
+        {
+            MessageFromCompany messageFromCompanyDB = new MessageFromCompany();
+            messageFromCompanyDB.Value = messageFromCompanyModel.Text;
+            messageFromCompanyDB.Date = messageFromCompanyModel.Date;
+            messageFromCompanyDB.Subject = messageFromCompanyModel.Subject;
+            return messageFromCompanyDB;
         }
 
 

@@ -1,12 +1,13 @@
-﻿using EntryManagement.DB;
-using EntryManagement.Model;
+﻿using EntryManagementWEB.DB;
+using EntryManagementWEB.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EntryManagementWEB.Model;
 
-namespace EntryManagement.DAL
+namespace EntryManagementWEB.DAL
 {
     public class CompanyDAL
     {

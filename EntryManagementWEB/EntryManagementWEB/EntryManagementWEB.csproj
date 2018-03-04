@@ -130,6 +130,20 @@
       <LastGenOutput>AccessControlSystemDataModel.cs</LastGenOutput>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="View\Company\Company.html" />
+    <Content Include="View\Company\CompanyController.js" />
+    <Content Include="View\Login\Login.html" />
+    <Content Include="View\Login\LoginController.js" />
+    <Content Include="View\Main\Main.html" />
+    <Content Include="View\Main\MainController.js" />
+    <Content Include="View\Members\AddNewMember.html" />
+    <Content Include="View\Members\AddNewMemberController.js" />
+    <Content Include="View\Members\MemberController.js" />
+    <Content Include="View\Members\Members.html" />
+    <Content Include="View\Message\AddNewMessage.html" />
+    <Content Include="View\Message\AddNewMessageController.js" />
+    <Content Include="View\Message\Message.html" />
+    <Content Include="View\Message\MessageController.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -216,7 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

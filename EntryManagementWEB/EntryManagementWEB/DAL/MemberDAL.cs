@@ -3,31 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntryManagement.DB;
-using EntryManagement.Model;
+using EntryManagementWEB.DB;
+using EntryManagementWEB.Model;
 
-namespace EntryManagement.DAL
+namespace EntryManagementWEB.DAL
 {
     public class MemberDAL
     {
-        public static MemberModel CheckMemberByCardNumber(string CardNumber)
-        {
-
-            AccessControlSystemEntities context = new AccessControlSystemEntities();
-            try
-            {
-                Member member = context.Members.Where(x => x.CardNumber == CardNumber).FirstOrDefault();
-                if (member != null)
-                    return MapToMemberModel(member, context);
-                
-                    
-            }
-            catch(Exception e)
-            {
-                
-            }
-            return null;
-        }
 
 
         public static MemberModel GetMemberById(int Id)
@@ -49,13 +31,13 @@ namespace EntryManagement.DAL
 
 
 
-        public static List<MemberModel> GetMembers(string CardNumber)
+        public static List<MemberModel> GetMembersByCompanyId(int CompanyId)
         {
 
             AccessControlSystemEntities context = new AccessControlSystemEntities();
             try
             {
-                List<Member> members = context.Members.ToList();
+                List<Member> members = context.Members.Where(x=>x.CompanyId==CompanyId).ToList();
                 List<MemberModel> memberModels = new List<MemberModel>();
                 foreach (Member item in members)
                 {

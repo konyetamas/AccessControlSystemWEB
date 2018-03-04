@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntryManagement.DB;
-using EntryManagement.Model;
+using EntryManagementWEB.DB;
+using EntryManagementWEB.Model;
 
-namespace EntryManagement.DAL
+namespace EntryManagementWEB.DAL
 {
     public class UserDAL 
     {
